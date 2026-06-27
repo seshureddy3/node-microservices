@@ -1,0 +1,57 @@
+{"level":"info","message":"API Gateway is running on port ${PORT}","service":"identity-service","timestamp":"2026-06-26T13:36:12.438Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:36:12.442Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:36:12.443Z"}
+{"level":"info","message":"API Gateway is running on port ${PORT}","service":"identity-service","timestamp":"2026-06-26T13:36:19.270Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:36:19.274Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:36:19.274Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:36:35.945Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:36:35.950Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:36:35.950Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:36:41.010Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:36:41.015Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:36:41.015Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:36:46.426Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:36:46.432Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:36:46.432Z"}
+{"level":"info","message":"Received POST request to /v1/auth/register","service":"identity-service","timestamp":"2026-06-26T13:37:28.427Z"}
+{"level":"info","message":"Request body: {\"firstName\":\"Sravana\",\"lastName\":\"Sandhya\",\"email\":\"sravana@gmail.com\",\"password\":\"[HIDDEN]\"}","service":"identity-service","timestamp":"2026-06-26T13:37:28.431Z"}
+{"level":"info","message":"Response received from Identity service: 201","service":"identity-service","timestamp":"2026-06-26T13:37:29.083Z"}
+{"level":"info","message":"Received POST request to /v1/auth/register","service":"identity-service","timestamp":"2026-06-26T13:38:07.780Z"}
+{"level":"info","message":"Request body: {\"firstName\":\"Sravan\",\"lastName\":\"Sandhya\",\"email\":\"sravan@gmail.com\",\"password\":\"[HIDDEN]\"}","service":"identity-service","timestamp":"2026-06-26T13:38:07.782Z"}
+{"level":"error","message":"Proxy error: ","service":"identity-service","timestamp":"2026-06-26T13:38:07.793Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:40:40.055Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:40:40.060Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:40:40.060Z"}
+{"level":"info","message":"Received POST request to /v1/auth/register","service":"identity-service","timestamp":"2026-06-26T13:40:45.067Z"}
+{"level":"info","message":"Request body: {\"firstName\":\"Sravan\",\"lastName\":\"Sandhya\",\"email\":\"sravan@gmail.com\",\"password\":\"[HIDDEN]\"}","service":"identity-service","timestamp":"2026-06-26T13:40:45.068Z"}
+{"level":"error","message":"Proxy error: ","service":"identity-service","timestamp":"2026-06-26T13:40:45.089Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:20.644Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:20.648Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:20.649Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:22.124Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:22.128Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:22.129Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:23.016Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:23.022Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:23.023Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:25.305Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:25.310Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:25.311Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:27.062Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:27.066Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:27.067Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:28.676Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:28.689Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:28.690Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:29.676Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:29.682Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:29.683Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:30.995Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:31.001Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:31.002Z"}
+{"level":"info","message":"API Gateway is running on port 3000","service":"identity-service","timestamp":"2026-06-26T13:41:32.286Z"}
+{"level":"info","message":"Identity service is running on port http://localhost:3001","service":"identity-service","timestamp":"2026-06-26T13:41:32.293Z"}
+{"level":"info","message":"Redis Url redis://localhost:6379","service":"identity-service","timestamp":"2026-06-26T13:41:32.295Z"}
+{"level":"info","message":"Received POST request to /v1/auth/register","service":"identity-service","timestamp":"2026-06-26T13:41:35.263Z"}
+{"level":"info","message":"Request body: {\"firstName\":\"Sravan\",\"lastName\":\"Sandhya\",\"email\":\"sravan@gmail.com\",\"password\":\"[HIDDEN]\"}","service":"identity-service","timestamp":"2026-06-26T13:41:35.264Z"}
+{"level":"error","message":"Proxy error: ","service":"identity-service","timestamp":"2026-06-26T13:41:35.281Z"}

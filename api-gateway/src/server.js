@@ -13,6 +13,7 @@ import errorHandler from "./middleware/errorHandler.js";
 const app = express();
 const { PORT, IDENTITY_SERVICE_URL } = process.env;
 
+app.set("trust proxy", 1);
 app.use(cors());
 app.use(helmet());
 app.use(express.json());

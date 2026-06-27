@@ -15,12 +15,15 @@ const RefreshTokenSchema = new Schema(
     expiresAt: {
       type: Date,
       required: true,
+      expires: 0,
+    },
+    used: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true },
 );
-
-RefreshTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 const RefreshToken = model("RefreshToken", RefreshTokenSchema);
 export default RefreshToken;

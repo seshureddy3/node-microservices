@@ -220,7 +220,7 @@ const logoutUser = async (req, res) => {
 
     if (existingTokenDoc.used) {
       logger.error(
-        `CRITICAL: Replay attempt on a used token during logout for user ${existingTokenDoc.user}!`,
+        `CRITICAL: Replay attempt on a used token during logo ut for user ${existingTokenDoc.user}!`,
       );
       await RefreshToken.deleteMany({ user: existingTokenDoc.user });
       return res.status(401).json({

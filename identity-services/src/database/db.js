@@ -15,7 +15,7 @@ const connectToDB = async () => {
     return true;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    logger.warn("MongoDB connection failed: ", message);
+    logger.warn(`MongoDB connection failed: ${err.message}`, { service: 'identity-service' });www
     return false;
   }
 };

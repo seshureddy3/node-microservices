@@ -1,29 +1,42 @@
 import "dotenv/config";
 import express from "express";
-import helmet from "helmet";
 import cors from "cors";
+import helmet from "helmet";
+import Redis from "ioredis";
 
 import logger from "./utils/logger.js";
-import connectToDB from "./database/db.js";
-import routes from "./routes/identity-routes.js";
 import errorHandler from "./middleware/error.js";
+import connectToDB from "./database/db.js";
 import requestLogger from "./middleware/logs.js";
-import { globalLimiter } from "./middleware/rateLimiter.js";
+import { globalLimiter } from "./middleware/ratelimiter.js";
+import postRoutes from "./routes/post-routes.js";
 
 const app = express();
-const { PORT, REDIS_URL } = process.env;
+const { PORT } = process.env;
 
-app.use(helmet());
+const redisClient = new Redis(process.env.REDIS_URL);
+redisClient.on("error", (err) => {
+  logger.error(`Redis connection error: ${err}`);
+});
+
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 
-// Safe Logging Middleware
 app.use(requestLogger);
-
-// Global DDOS protection and rate limiting
 app.use(globalLimiter);
 
-app.use("/api/auth", routes);
+//routes
+
+app.use(
+  "/api/posts",
+  (req, res, next) => {
+    req.redisClient = redisClient;
+    next();
+  },
+  postRoutes,
+);
+
 app.use(errorHandler);
 
 (async () => {
@@ -44,4 +57,9 @@ app.use(errorHandler);
 
 process.on("unhandledRejection", (reason, promise) => {
   logger.error(`Unhandled Rejection at ${promise}, reason: ${reason}`);
+});
+
+process.on("uncaughtException", (error) => {
+  logger.error(`Uncaught Exception: ${error.message}`);
+  process.exit(1);
 });

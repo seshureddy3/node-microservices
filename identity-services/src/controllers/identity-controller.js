@@ -185,7 +185,7 @@ const refreshTokenUser = async (req, res) => {
       refreshToken: newRefreshToken,
     });
   } catch (err) {
-    logger.error("Refresh token error occured", err);
+    logger.error("Refresh token controller error occured", err);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

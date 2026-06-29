@@ -4,6 +4,7 @@ import logger from "../utils/logger.js";
 import Redis from "ioredis";
 
 const redisClient = new Redis(process.env.REDIS_URL);
+redisClient.on("error", (err) => logger.error("Redis error:", err));
 
 const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,

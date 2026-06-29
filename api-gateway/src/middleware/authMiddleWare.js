@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import logger from "../utils/logger.js";
 
-const authMiddleWare = (req, res, next) => {
+const validateUser = (req, res, next) => {
   const { JWT_SECRET } = process.env;
 
   if (!JWT_SECRET) {
     logger.error("CRITICAL: JWT_SECRET environment variable is missing.");
     return res.status(500).json({
       success: false,
-      message: "Internal server configutation error",
+      message: "Internal server configuration error",
     });
   }
   try {
@@ -36,8 +36,18 @@ const authMiddleWare = (req, res, next) => {
       });
     }
 
-    const decodeTokenInfo = jwt.verify(token, JWT_SECRET);
-    req.userInfo = decodeTokenInfo;
+    const decodeToken = jwt.verify(token, JWT_SECRET);
+    req.user = decodeToken;
+
+    const userId = decodeToken.id || decodeToken._id || decodeToken.sub;
+
+    if (userId) {
+      req.headers["x-user-id"] = String(userId);
+    } else {
+      logger.warn(
+        "Token verified, but no valid user ID claim found in payload.",
+      );
+    }
 
     next();
   } catch (err) {
@@ -65,4 +75,4 @@ const authMiddleWare = (req, res, next) => {
   }
 };
 
-export default authMiddleWare;
+export default validateUser;

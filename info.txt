@@ -1,0 +1,7 @@
+sudo apt update
+sudo apt install redis-server -y
+sudo service redis-server start
+
+option-1: for generating random tokens = node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+option-2: node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+option-3: node -e "console.log(crypto.subtle.generateKey({name:'HMAC',hash:'SHA-256'},true,['sign']).then(k=>crypto.subtle.exportKey('raw',k)).then(b=>console.log(Buffer.from(b).toString('hex'))))"

@@ -1,17 +1,17 @@
 import { connect } from "mongoose";
 import logger from "../utils/logger.js";
 
-const connectToDB = async () => {
+const connectToDb = async () => {
   const { MONGODB_URI } = process.env;
 
   if (!MONGODB_URI) {
-    logger.warn("Missing database configuration. Set MONGODB_URI.");
+    logger.warn(`MongoDb configuration failed @ database -> db.js`);
     return false;
   }
 
   try {
     await connect(MONGODB_URI);
-    console.log("MongoDB connected successfully!");
+    logger.info("MongoDB connected!");
     return true;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
@@ -22,4 +22,4 @@ const connectToDB = async () => {
   }
 };
 
-export default connectToDB;
+export default connectToDb;

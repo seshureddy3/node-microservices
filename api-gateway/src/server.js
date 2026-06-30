@@ -12,12 +12,12 @@ import errorHandler from "./middleware/errorHandler.js";
 import validateUser from "./middleware/authMiddleWare.js";
 
 const app = express();
-const { PORT, IDENTITY_SERVICE_URL, POST_SERVICE_URL } = process.env;
+const { PORT, IDENTITY_SERVICE_URL, POST_SERVICE_URL, MEDIA_SERVICE_URL } =
+  process.env;
 
 app.set("trust proxy", 1);
 app.use(cors());
 app.use(helmet());
-app.use(express.json());
 
 app.use(rateLimiter);
 app.use(requestLogger);
@@ -41,6 +41,7 @@ const proxyOptions = {
 
 app.use(
   "/v1/auth",
+  express.json(),
   proxy(IDENTITY_SERVICE_URL, {
     ...proxyOptions,
     proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
@@ -62,6 +63,7 @@ app.use(
 
 app.use(
   "/v1/posts",
+  express.json(),
   validateUser,
   proxy(POST_SERVICE_URL, {
     ...proxyOptions,
@@ -89,6 +91,38 @@ app.use(
   }),
 );
 
+app.use(
+  "/v1/media",
+  validateUser,
+  proxy(MEDIA_SERVICE_URL, {
+    ...proxyOptions,
+
+    parseReqBody: false,
+
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      const extractedId = srcReq.user?.userId || srcReq.user?.id;
+      if (extractedId) {
+        proxyReqOpts.headers["x-user-id"] = String(extractedId);
+      }
+
+      const contentType = srcReq.headers["content-type"];
+      if (!contentType || !contentType.startsWith("multipart/form-data")) {
+        proxyReqOpts.headers["content-type"] = "application/json";
+      }
+
+      return proxyReqOpts;
+    },
+
+    userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+      logger.info(
+        `Response received from media service: ${proxyRes.statusCode}`,
+      );
+
+      return proxyResData;
+    },
+  }),
+);
+
 app.use(errorHandler);
 
 app.listen(PORT, () => {
@@ -98,6 +132,9 @@ app.listen(PORT, () => {
   );
   logger.info(
     `Post service is running on port ${process.env.POST_SERVICE_URL}`,
+  );
+  logger.info(
+    `Media service is running on port ${process.env.MEDIA_SERVICE_URL}`,
   );
   logger.info(`Redis Url ${process.env.REDIS_URL}`);
 });

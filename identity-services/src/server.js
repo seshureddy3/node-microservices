@@ -13,6 +13,7 @@ import { globalLimiter } from "./middleware/rateLimiter.js";
 const app = express();
 const { PORT, REDIS_URL } = process.env;
 
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());

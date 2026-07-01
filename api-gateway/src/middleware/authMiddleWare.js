@@ -39,7 +39,7 @@ const validateUser = (req, res, next) => {
     const decodeToken = jwt.verify(token, JWT_SECRET);
     req.user = decodeToken;
 
-    const userId = decodeToken.id || decodeToken._id || decodeToken.sub;
+    const userId = decodeToken.id || decodeToken._id || decodeToken.sub || decodeToken.userId;
 
     if (userId) {
       req.headers["x-user-id"] = String(userId);

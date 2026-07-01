@@ -15,7 +15,8 @@ const generateTokens = async (user) => {
 
   const accessToken = await jwt.sign(
     {
-      userId: user._id,
+      id: user._id.toString(),
+      userId: user._id.toString(),
       userName: user.name,
     },
     JWT_SECRET,

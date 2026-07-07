@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { uploadMedia } from "../controllers/media.js";
+import { uploadMedia, getAllMedias } from "../controllers/media.js";
 import uploadMiddleware from "../middleware/media.js";
 import { authenticateUser } from "../middleware/authMiddleware.js";
 import logger from "../utils/logger.js";
@@ -43,5 +43,7 @@ router.post(
   },
   uploadMedia,
 );
+
+router.get("/get", authenticateUser, getAllMedias);
 
 export default router;

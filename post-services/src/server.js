@@ -10,6 +10,7 @@ import connectToDB from "./database/db.js";
 import requestLogger from "./middleware/logs.js";
 import { globalLimiter } from "./middleware/ratelimiter.js";
 import postRoutes from "./routes/post-routes.js";
+import { connectToRabbit } from "./utils/rabbitmq.js";
 
 const app = express();
 const { PORT } = process.env;
@@ -50,6 +51,7 @@ app.use(errorHandler);
     app.locals.dbConnected = true;
   }
 
+  await connectToRabbit();
   app.listen(PORT, () => {
     logger.info(`Server is running at port: ${PORT}`);
   });

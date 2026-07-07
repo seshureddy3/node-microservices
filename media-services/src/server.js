@@ -8,6 +8,8 @@ import errorHandler from "./middleware/errorHandler.js";
 import connectToDb from "./database/db.js";
 import requestLogger from "./middleware/logs.js";
 import mediaRoutes from "./routes/media.js";
+import { connectToRabbit, subscribeEvent } from "./utils/rabbitMq.js";
+import { handlePostDeleted } from "./handler/eventHandler.js";
 
 const app = express();
 const { PORT } = process.env;
@@ -29,7 +31,7 @@ app.use(errorHandler);
 (async () => {
   const connected = await connectToDb();
 
-  if (!connectToDb) {
+  if (!connected) {
     logger.error(
       `Warning: Database connection failed. Server will start but database operations may be unavailable.`,
     );
@@ -37,6 +39,10 @@ app.use(errorHandler);
   } else {
     app.locals.dbConnected = true;
   }
+
+  await connectToRabbit();
+
+  await subscribeEvent("post.deleted", handlePostDeleted);
 
   app.listen(PORT, () => {
     logger.info(`Server is started at ${PORT}`);

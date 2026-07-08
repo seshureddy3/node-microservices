@@ -1,0 +1,34 @@
+{
+  "name": "KCMS Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+
+  "forwardPorts": [5672, 15672, 3000],
+  "portsAttributes": {
+    "15672": {
+      "label": "RabbitMQ Management UI",
+      "onAutoForward": "notify"
+    },
+    "5672": {
+      "label": "RabbitMQ AMQP"
+    },
+    "3000": {
+      "label": "NestJS App"
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "sudo service rabbitmq-server start || true",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

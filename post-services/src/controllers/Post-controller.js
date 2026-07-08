@@ -48,7 +48,13 @@ const createPost = async (req, res) => {
 
     await newPost.save();
 
-    await invalidatePostCache(req, newPost._id.toString());
+    await publishEvent("post.created", {
+      postId: newPost._id.toString(),
+      userId: newPost.user.toString(),
+      content: newPost.content,
+    });
+
+    await await invalidatePostCache(req, newPost._id.toString());
     logger.info(`Post created successfully: ${newPost}`);
     return res.status(201).json({
       success: true,

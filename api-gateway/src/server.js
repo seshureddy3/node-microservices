@@ -12,8 +12,13 @@ import errorHandler from "./middleware/errorHandler.js";
 import validateUser from "./middleware/authMiddleWare.js";
 
 const app = express();
-const { PORT, IDENTITY_SERVICE_URL, POST_SERVICE_URL, MEDIA_SERVICE_URL } =
-  process.env;
+const {
+  PORT,
+  IDENTITY_SERVICE_URL,
+  POST_SERVICE_URL,
+  MEDIA_SERVICE_URL,
+  SEARCH_SERVICE_URL,
+} = process.env;
 
 app.set("trust proxy", 1);
 app.use(cors());
@@ -95,6 +100,7 @@ app.use(
 
 app.use(
   "/v1/media",
+  express.json(),
   validateUser,
   proxy(MEDIA_SERVICE_URL, {
     ...proxyOptions,
@@ -125,6 +131,39 @@ app.use(
   }),
 );
 
+app.use(
+  "/v1/search",
+  express.json(),
+  validateUser,
+  proxy(SEARCH_SERVICE_URL, {
+    ...proxyOptions,
+
+    parseReqBody: false,
+
+    proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
+      const extractedId = srcReq.user?.userId || srcReq.user?.id;
+      if (extractedId) {
+        proxyReqOpts.headers["x-user-id"] = String(extractedId);
+      }
+
+      const contentType = srcReq.headers["content-type"];
+      if (!contentType || !contentType.startsWith("multipart/form-data")) {
+        proxyReqOpts.headers["content-type"] = "application/json";
+      }
+
+      return proxyReqOpts;
+    },
+
+    userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+      logger.info(
+        `Response received from Search service: ${proxyRes.statusCode}`,
+      );
+
+      return proxyResData;
+    },
+  }),
+);
+
 app.use(errorHandler);
 
 app.listen(PORT, () => {
@@ -137,6 +176,9 @@ app.listen(PORT, () => {
   );
   logger.info(
     `Media service is running on port ${process.env.MEDIA_SERVICE_URL}`,
+  );
+  logger.info(
+    `Search service is running on port ${process.env.MEDIA_SERVICE_URL}`,
   );
   logger.info(`Redis Url ${process.env.REDIS_URL}`);
 });
